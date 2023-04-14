@@ -1,0 +1,27 @@
+# Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pyzw
+*.egg-info/
+*.egg
+
+# Local development settings
+.env
+*.sqlite3
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.swp
+*~
+
+# Dependencies
+.venv/
+venv/
+*.env
+*.log
