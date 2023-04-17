@@ -22,15 +22,15 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             userFound = UserModel.objects.get(email=data['email'])
         except UserModel.DoesNotExist:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Invalid credentials'}, status.HTTP_404_NOT_FOUND)
 
         if not check_password(data['password'], userFound.password):
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'error': 'Invalid credentials'}, status.HTTP_404_NOT_FOUND)
 
         token = self.generateJwt(
             email=userFound.email, username=userFound.username, is_admin=userFound.is_admin)
 
-        return Response(token, status=status.HTTP_200_OK)
+        return Response(token, status.HTTP_200_OK)
 
     @action(detail=False, methods=['post'])
     def register(self, request):
@@ -42,7 +42,7 @@ class UserViewSet(viewsets.ModelViewSet):
         token = self.generateJwt(
             email=serializer['email'], username=serializer['username'], is_admin=serializer['is_admin'])
 
-        return Response(token, status=status.HTTP_201_CREATED)
+        return Response(token, status.HTTP_201_CREATED)
 
     def generateJwt(self, username: str = None, email: str = None, is_admin: bool = None):
         now = datetime.utcnow()
